@@ -27,15 +27,41 @@ function App() {
       <ProductProvider>
         <CartProvider>
              <Routes>
+
               <Route path='/login' element={<Login/>} />
               <Route path='/register' element={<Register/>} />
-              <Route path='/' element={<ProtectedRoute><MainLayout><Home/></MainLayout> </ProtectedRoute>}></Route>
+<Route
+  path="/"
+  element={
+    <MainLayout>
+      <Home />
+    </MainLayout>
+  }
+/>
               <Route path='category/:categoryName' element={<MainLayout><CategoryPage/></MainLayout>}></Route>
               <Route path='/admin' element={<ProtectedAdminRoute><Admin/></ProtectedAdminRoute>} />
               <Route path='/contact' element={<MainLayout><Contact/></MainLayout>}></Route>
-              <Route path='/checkout' element={<MainLayout><Checkout/></MainLayout>}></Route>
+<Route
+  path="/checkout"
+  element={
+    <ProtectedRoute>
+      <MainLayout>
+        <Checkout />
+      </MainLayout>
+    </ProtectedRoute>
+  }
+/>
               <Route path='/cart' element={<MainLayout><Cart/></MainLayout>}></Route>
-              <Route path='/payment' element={<MainLayout><Payment/></MainLayout>}></Route>
+<Route
+  path="/payment"
+  element={
+    <ProtectedRoute>
+      <MainLayout>
+        <Payment />
+      </MainLayout>
+    </ProtectedRoute>
+  }
+/>
 
             </Routes>
             </CartProvider>
