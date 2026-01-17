@@ -1,93 +1,193 @@
-import React from "react";
-import { AiOutlineRight,AiOutlineLeft } from "react-icons/ai";
+import React, { useEffect } from "react";
+import { AiOutlineRight, AiOutlineLeft } from "react-icons/ai";
 import Slider from "react-slick";
 import Interval from "./Interval";
 import Interval2 from "./Interval2";
 import { useNavigate } from "react-router-dom";
+
 const ProductCard = () => {
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
-    const PrevArrow=({onClick})=>{
-        return <div className="text-black absolute top-[-4.5rem] translate-y-1 z-10 right-60 text-4xl cursor-pointer" onClick={onClick}><AiOutlineLeft /></div>
-    }
-        const NextArrow=({onClick})=>{
-        return <div className="text-black absolute top-[-4.5rem] text-4xl cursor-pointer translate-y-1 z-10 right-50" onClick={onClick}><AiOutlineRight/></div>
-    }
+  const handleCheckout = (product) => {
+    localStorage.setItem("checkoutItems", JSON.stringify([product]));
+    navigate("/checkout");
+  };
 
-    const handleCheckout=(product)=>{
-    localStorage.setItem('checkoutItems',JSON.stringify([product]))
-    navigate('/checkout')
-
-  }
-   const Keyboards = [
+  /* =========================
+     PRODUCT DATA (WITH CATEGORY)
+  ========================= */
+  const products = [
+  // ================= KEYBOARDS =================
   {
-    imageUrl: "assets/images/Product1.png",
+    id: 1,
     name: "Swarm All White Wireless Gaming Keyboard",
-    price: "499",
-    id:Date.now() +1
+    price: 499,
+    imageUrl: "assets/images/Product1.png",
+    category: "keyboard",
   },
   {
-    imageUrl: "assets/images/Product2.png",
+    id: 2,
     name: "Swarm Sasuke Edition",
-    price: "799",
-    id:Date.now()+2
+    price: 799,
+    imageUrl: "assets/images/Product2.png",
+    category: "keyboard",
   },
   {
-    imageUrl: "assets/images/Product3.png",
+    id: 3,
     name: "Hive75 Black - Purple Wired Gaming Keyboard",
-    price: "799",
-    id:Date.now()+3
+    price: 799,
+    imageUrl: "assets/images/Product3.png",
+    category: "keyboard",
   },
   {
-    imageUrl: "assets/images/Product4.png",
+    id: 4,
     name: "Hive98 Full-Size White - Purple Wired Gaming Keyboard",
-    price: "299",
-    id:Date.now()+4
+    price: 299,
+    imageUrl: "assets/images/Product4.png",
+    category: "keyboard",
   },
   {
-    imageUrl: "assets/images/Product5.png",
+    id: 5,
     name: "Hive65 Black Purple Mechanical Gaming Keyboard",
-    price: "399",
-    id:Date.now()+5
+    price: 399,
+    imageUrl: "assets/images/Product5.png",
+    category: "keyboard",
+  },
 
-  }
-];
-
-const Mouse = [
+  // ================= MOUSE =================
   {
-    id: Date.now() + 6,
-    imageUrl: "assets/images/Mouse1.png",
+    id: 6,
     name: "Anzu Black 52g Wireless Gaming Mouse",
-    price: "499"
+    price: 499,
+    imageUrl: "assets/images/Mouse1.png",
+    category: "mouse",
   },
   {
-    id: Date.now() + 7,
-    imageUrl: "assets/images/Mouse2.png",
+    id: 7,
     name: "Ikarus White 55g Wireless Gaming Mouse",
-    price: "799"
+    price: 799,
+    imageUrl: "assets/images/Mouse2.png",
+    category: "mouse",
   },
   {
-    id: Date.now() + 8,
-    imageUrl: "assets/images/Mouse3.png",
+    id: 8,
     name: "Hawk Naruto Black Orange",
-    price: "799"
+    price: 799,
+    imageUrl: "assets/images/Mouse3.png",
+    category: "mouse",
   },
   {
-    id: Date.now() + 9,
-    imageUrl: "assets/images/Mouse4.png",
+    id: 9,
     name: "Hawk Gaming Mouse - Black",
-    price: "299"
+    price: 299,
+    imageUrl: "assets/images/Mouse4.png",
+    category: "mouse",
   },
   {
-    id: Date.now() + 10,
-    imageUrl: "assets/images/Mouse5.png",
+    id: 10,
     name: "Harpy Light Weight RGB Gaming Mouse",
-    price: "399"
-  }
+    price: 399,
+    imageUrl: "assets/images/Mouse5.png",
+    category: "mouse",
+  },
+
+  // ================= AUDIO =================
+  {
+    id: 11,
+    name: "Thunder Bass Wireless Headset",
+    price: 1299,
+    imageUrl: "assets/images/Audio1.png",
+    category: "audio",
+  },
+  {
+    id: 12,
+    name: "Pulse Pro RGB Gaming Headphones",
+    price: 1599,
+    imageUrl: "assets/images/Audio2.png",
+    category: "audio",
+  },
+  {
+    id: 13,
+    name: "EchoX Surround Sound Headset",
+    price: 1999,
+    imageUrl: "assets/images/Audio3.png",
+    category: "audio",
+  },
+  {
+    id: 14,
+    name: "WaveCore Studio Gaming Headphones",
+    price: 1799,
+    imageUrl: "assets/images/Audio4.png",
+    category: "audio",
+  },
+
+  // ================= CHAIR =================
+  {
+    id: 15,
+    name: "Titan Pro Ergonomic Gaming Chair",
+    price: 8999,
+    imageUrl: "assets/images/chair1.png",
+    category: "chair",
+  },
+  {
+    id: 16,
+    name: "Elite Racer Premium Gaming Chair",
+    price: 10999,
+    imageUrl: "assets/images/chair2.png",
+    category: "chair",
+  },
+  {
+    id: 17,
+    name: "ComfortX Adjustable Gaming Chair",
+    price: 7999,
+    imageUrl: "assets/images/chair3.png",
+    category: "chair",
+  },
 ];
 
 
+  /* =========================
+     SAVE PRODUCTS ONCE
+  ========================= */
+useEffect(() => {
+  const stored = JSON.parse(localStorage.getItem("products")) || [];
 
+  const mergedProducts = [...stored];
+
+  products.forEach((newProduct) => {
+    const exists = mergedProducts.some(
+      (p) => p.id === newProduct.id
+    );
+    if (!exists) {
+      mergedProducts.push(newProduct);
+    }
+  });
+
+  localStorage.setItem("products", JSON.stringify(mergedProducts));
+}, []);
+
+
+
+  /* =========================
+     SLIDER ARROWS
+  ========================= */
+  const PrevArrow = ({ onClick }) => (
+    <div
+      className="absolute top-[-4.5rem] right-60 text-4xl cursor-pointer z-10"
+      onClick={onClick}
+    >
+      <AiOutlineLeft />
+    </div>
+  );
+
+  const NextArrow = ({ onClick }) => (
+    <div
+      className="absolute top-[-4.5rem] right-50 text-4xl cursor-pointer z-10"
+      onClick={onClick}
+    >
+      <AiOutlineRight />
+    </div>
+  );
 
   const settings = {
     arrows: true,
@@ -97,83 +197,84 @@ const Mouse = [
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
-    nextArrow:<NextArrow/>,
-    prevArrow:<PrevArrow/>,
-
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
   };
+
+  const keyboards = products.filter(p => p.category === "keyboard");
+  const mouse = products.filter(p => p.category === "mouse");
+
   return (
     <div className="relative w-full overflow-x-clip">
-                <Interval/>
+      <Interval />
 
+      {/* KEYBOARDS */}
       <div className="p-10">
-<h1 className="py-5 px-5 md:py-10 md:px-10 text-3xl md:text-5xl font-semibold">
-  Gaming Keyboards
-</h1>
+        <h1 className="text-3xl md:text-5xl font-semibold mb-8">
+          Gaming Keyboards
+        </h1>
 
-       <Slider {...settings} className="Card-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-
-            
-            {
-              Keyboards.map((keyboard)=>(
-            <div key={keyboard.id} className="card px-5 ">
-              <div className="bg-[#FAFAFA] rounded-2xl flex flex-col overflow-hidden h-[400px] sm:h-[420px] md:h-[450px] lg:h-[480px]">
+        <Slider {...settings}>
+          {keyboards.map((product) => (
+            <div key={product.id} className="px-5">
+              <div className="bg-[#FAFAFA] rounded-2xl h-[450px] flex flex-col">
                 <img
-                  className="rounded-t-2xl w-full h-2/3 object-cover"
-                  src={keyboard.imageUrl}
-                  alt="Keyboards"
+                  src={product.imageUrl}
+                  alt={product.name}
+                  className="h-2/3 object-cover"
                 />
-                <div className="card-Text flex flex-col justify-between gap-2 py-3 px-5 flex-1">
-  <h1 className="text-lg md:text-xl font-medium">{keyboard.name}</h1>
-  <div className="flex justify-between items-center mt-auto">
-    <span className="text-lg md:text-xl font-semibold">${keyboard.price}</span>
-    <button onClick={()=>handleCheckout(keyboard)} className="bg-indigo-600 text-white px-3 py-1 md:px-4 md:py-2 rounded-lg hover:bg-indigo-700 transition">
-      Buy Now
-    </button>
-  </div>
-</div>
-
+                <div className="p-5 flex flex-col justify-between flex-1">
+                  <h1 className="text-lg font-medium">{product.name}</h1>
+                  <div className="flex justify-between items-center">
+                    <span className="font-semibold">${product.price}</span>
+                    <button
+                      onClick={() => handleCheckout(product)}
+                      className="bg-indigo-600 text-white px-4 py-2 rounded-lg"
+                    >
+                      Buy Now
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-              ))
-            }
+          ))}
         </Slider>
       </div>
 
-
-
+      {/* MOUSE */}
       <div className="p-10">
-  <h1 className="py-5 px-5 md:py-10 md:px-10 text-3xl md:text-5xl font-semibold">
-    Gaming Mouse
-  </h1>
+        <h1 className="text-3xl md:text-5xl font-semibold mb-8">
+          Gaming Mouse
+        </h1>
 
-  <Slider {...settings} className="Card-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-    {Mouse.map((mouse) => (
-      <div key={mouse.id} className="card px-5">
-        <div className="bg-[#FAFAFA] rounded-2xl flex flex-col overflow-hidden h-[400px] sm:h-[420px] md:h-[450px] lg:h-[480px]">
-          <img
-            className="rounded-t-2xl w-full h-2/3 object-cover"
-            src={mouse.imageUrl}
-            alt={mouse.name}
-          />
-          <div className="card-Text flex flex-col justify-between gap-2 py-3 px-5 flex-1">
-            <h1 className="text-lg md:text-xl font-medium">{mouse.name}</h1>
-            <div className="flex justify-between items-center mt-auto">
-              <span className="text-lg md:text-xl font-semibold">${mouse.price}</span>
-              <button onClick={()=>handleCheckout(mouse)} className="bg-indigo-600 text-white px-3 py-1 md:px-4 md:py-2 rounded-lg hover:bg-indigo-700 transition">
-                Buy Now
-              </button>
+        <Slider {...settings}>
+          {mouse.map((product) => (
+            <div key={product.id} className="px-5">
+              <div className="bg-[#FAFAFA] rounded-2xl h-[450px] flex flex-col">
+                <img
+                  src={product.imageUrl}
+                  alt={product.name}
+                  className="h-2/3 object-cover"
+                />
+                <div className="p-5 flex flex-col justify-between flex-1">
+                  <h1 className="text-lg font-medium">{product.name}</h1>
+                  <div className="flex justify-between items-center">
+                    <span className="font-semibold">${product.price}</span>
+                    <button
+                      onClick={() => handleCheckout(product)}
+                      className="bg-indigo-600 text-white px-4 py-2 rounded-lg"
+                    >
+                      Buy Now
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          ))}
+        </Slider>
       </div>
-    ))}
-  </Slider>
-</div>
 
-
-          <Interval2/>
-
-
+      <Interval2 />
     </div>
   );
 };

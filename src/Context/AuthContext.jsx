@@ -1,67 +1,127 @@
 import { createContext, useEffect, useState } from "react";
 
-export const AuthContext=createContext()
+export const AuthContext = createContext();
 
-export const AuthProvider=({children})=>{
-    const [users,setUsers]=useState(JSON.parse(localStorage.getItem('users'))|| [])
-    const [currentUser,setCurrentUser]=useState(JSON.parse(localStorage.getItem('currentUser')) || null)
+/* =========================
+   SAFE JSON PARSER
+========================= */
+const safeParse = (key, fallback) => {
+  try {
+    const value = localStorage.getItem(key);
+    if (!value || value === "undefined") return fallback;
+    return JSON.parse(value);
+  } catch (error) {
+    return fallback;
+  }
+};
 
-    useEffect(()=>{
-        localStorage.setItem('users',JSON.stringify(users))
-    },[users])
+export const AuthProvider = ({ children }) => {
 
-    useEffect(()=>{
-        localStorage.setItem('currentUser',JSON.stringify(currentUser))
-    },[currentUser])
+  /* =========================
+     STATE
+  ========================= */
+  const [users, setUsers] = useState(() => safeParse("users", []));
+  const [currentUser, setCurrentUser] = useState(() =>
+    safeParse("currentUser", null)
+  );
 
-    useEffect(()=>{
-        let existingusers=JSON.parse(localStorage.getItem('users'))
-        let adminexists=existingusers.find(u=>u.role==='admin')
-        if(!adminexists){
-            let admin={email:"admin@gmail.com",password:"admin",role:"admin"}
-            existingusers.push(admin)
-            localStorage.setItem('users',JSON.stringify(existingusers))
-        }
-    },[])
+  /* =========================
+     PERSIST USERS
+  ========================= */
+  useEffect(() => {
+    localStorage.setItem("users", JSON.stringify(users));
+  }, [users]);
 
- 
-
-    const RegisterUser=(email,password)=>{
-        const exists=users.find((u)=>u.email===email)
-        if (exists){
-            alert("user already exists")
-            return false;
-        }
-        let Newuser={email,password,role:'customer'}
-        setUsers([...users,Newuser])
-        return true
-
+  /* =========================
+     PERSIST CURRENT USER
+  ========================= */
+  useEffect(() => {
+    if (currentUser === null) {
+      localStorage.removeItem("currentUser");
+    } else {
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
     }
-    const LoginUser=(email,password)=>{
-        const found=users.find((u)=>u.email===email && u.password===password)
-        if (found){
-            setCurrentUser(found)
-            alert("Login Successfully")
-            return true
-        }
-        else{
-            alert("No user has been Found")
-            return false
-        }
+  }, [currentUser]);
+
+  /* =========================
+     CREATE ADMIN IF NOT EXISTS
+  ========================= */
+  useEffect(() => {
+    const existingUsers = safeParse("users", []);
+    const adminExists = existingUsers.some(u => u.role === "admin");
+
+    if (!adminExists) {
+      const admin = {
+        email: "admin@gmail.com",
+        password: "admin",
+        role: "admin",
+      };
+
+      const updatedUsers = [...existingUsers, admin];
+      setUsers(updatedUsers);
+      localStorage.setItem("users", JSON.stringify(updatedUsers));
+    }
+  }, []);
+
+  /* =========================
+     REGISTER USER
+  ========================= */
+  const RegisterUser = (email, password) => {
+    const exists = users.find(u => u.email === email);
+    if (exists) {
+      alert("User already exists");
+      return false;
     }
 
-    const LogoutUser=()=>{
-        setCurrentUser(null)
-        localStorage.removeItem("currentUser");
-        alert("Logged out Successfully")
-    }
+    const newUser = {
+      email,
+      password,
+      role: "customer",
+    };
+
+    setUsers([...users, newUser]);
+    return true;
+  };
+
+  /* =========================
+   LOGIN USER
+========================= */
+const LoginUser = (email, password) => {
+  const found = users.find(
+    (u) => u.email === email && u.password === password
+  );
+
+  if (found) {
+    setCurrentUser(found);
+    alert("Login Successfully");
+    return found;
+  }
+
+  alert("Invalid email or password");
+  return null;
+};
 
 
+  /* =========================
+     LOGOUT USER
+  ========================= */
+  const LogoutUser = () => {
+    setCurrentUser(null);
+    alert("Logged out Successfully");
+  };
 
-    return(
-        <AuthContext.Provider value={{users,setUsers,currentUser,RegisterUser,LoginUser,LogoutUser}}>
-
-            {children}
-        </AuthContext.Provider>
-    )
-}
+  return (
+    <AuthContext.Provider
+      value={{
+        users,
+        setUsers,
+        currentUser,
+        RegisterUser,
+        LoginUser,
+        LogoutUser,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+};
