@@ -22,35 +22,40 @@ const ProductCard = () => {
     id: 1,
     name: "Swarm All White Wireless Gaming Keyboard",
     price: 499,
-    imageUrl: "assets/images/Product1.png",
+    imageUrl:
+      "https://res.cloudinary.com/dnt75yyou/image/upload/f_auto,q_auto/Product1_xvbxbb",
     category: "keyboard",
   },
   {
     id: 2,
     name: "Swarm Sasuke Edition",
     price: 799,
-    imageUrl: "assets/images/Product2.png",
+    imageUrl:
+      "https://res.cloudinary.com/dnt75yyou/image/upload/f_auto,q_auto/Product2_ejuuyi",
     category: "keyboard",
   },
   {
     id: 3,
     name: "Hive75 Black - Purple Wired Gaming Keyboard",
     price: 799,
-    imageUrl: "assets/images/Product3.png",
+    imageUrl:
+      "https://res.cloudinary.com/dnt75yyou/image/upload/f_auto,q_auto/Product3_srq6ma",
     category: "keyboard",
   },
   {
     id: 4,
     name: "Hive98 Full-Size White - Purple Wired Gaming Keyboard",
     price: 299,
-    imageUrl: "assets/images/Product4.png",
+    imageUrl:
+      "https://res.cloudinary.com/dnt75yyou/image/upload/f_auto,q_auto/Product4_bf09vn",
     category: "keyboard",
   },
   {
     id: 5,
     name: "Hive65 Black Purple Mechanical Gaming Keyboard",
     price: 399,
-    imageUrl: "assets/images/Product5.png",
+    imageUrl:
+      "https://res.cloudinary.com/dnt75yyou/image/upload/f_auto,q_auto/Product5_hdt6fm",
     category: "keyboard",
   },
 
@@ -59,35 +64,40 @@ const ProductCard = () => {
     id: 6,
     name: "Anzu Black 52g Wireless Gaming Mouse",
     price: 499,
-    imageUrl: "assets/images/Mouse1.png",
+    imageUrl:
+      "https://res.cloudinary.com/dnt75yyou/image/upload/f_auto,q_auto/Mouse1_zuwd5z",
     category: "mouse",
   },
   {
     id: 7,
     name: "Ikarus White 55g Wireless Gaming Mouse",
     price: 799,
-    imageUrl: "assets/images/Mouse2.png",
+    imageUrl:
+      "https://res.cloudinary.com/dnt75yyou/image/upload/f_auto,q_auto/Mouse2_elvbss",
     category: "mouse",
   },
   {
     id: 8,
     name: "Hawk Naruto Black Orange",
     price: 799,
-    imageUrl: "assets/images/Mouse3.png",
+    imageUrl:
+      "https://res.cloudinary.com/dnt75yyou/image/upload/f_auto,q_auto/Mouse3_yln7ed",
     category: "mouse",
   },
   {
     id: 9,
     name: "Hawk Gaming Mouse - Black",
     price: 299,
-    imageUrl: "assets/images/Mouse4.png",
+    imageUrl:
+      "https://res.cloudinary.com/dnt75yyou/image/upload/f_auto,q_auto/Mouse4_zgpkqd",
     category: "mouse",
   },
   {
     id: 10,
     name: "Harpy Light Weight RGB Gaming Mouse",
     price: 399,
-    imageUrl: "assets/images/Mouse5.png",
+    imageUrl:
+      "https://res.cloudinary.com/dnt75yyou/image/upload/f_auto,q_auto/Mouse5_t6vdc1",
     category: "mouse",
   },
 
@@ -96,28 +106,32 @@ const ProductCard = () => {
     id: 11,
     name: "Thunder Bass Wireless Headset",
     price: 1299,
-    imageUrl: "assets/images/Audio1.png",
+    imageUrl:
+      "https://res.cloudinary.com/dnt75yyou/image/upload/f_auto,q_auto/Audio1_cuzaa4",
     category: "audio",
   },
   {
     id: 12,
     name: "Pulse Pro RGB Gaming Headphones",
     price: 1599,
-    imageUrl: "assets/images/Audio2.png",
+    imageUrl:
+      "https://res.cloudinary.com/dnt75yyou/image/upload/f_auto,q_auto/Audio2_zleycx",
     category: "audio",
   },
   {
     id: 13,
     name: "EchoX Surround Sound Headset",
     price: 1999,
-    imageUrl: "assets/images/Audio3.png",
+    imageUrl:
+      "https://res.cloudinary.com/dnt75yyou/image/upload/f_auto,q_auto/Audio3_ez4n21",
     category: "audio",
   },
   {
     id: 14,
     name: "WaveCore Studio Gaming Headphones",
     price: 1799,
-    imageUrl: "assets/images/Audio4.png",
+    imageUrl:
+      "https://res.cloudinary.com/dnt75yyou/image/upload/f_auto,q_auto/Audio4_jfgije",
     category: "audio",
   },
 
@@ -126,21 +140,24 @@ const ProductCard = () => {
     id: 15,
     name: "Titan Pro Ergonomic Gaming Chair",
     price: 8999,
-    imageUrl: "assets/images/chair1.png",
+    imageUrl:
+      "https://res.cloudinary.com/dnt75yyou/image/upload/f_auto,q_auto/chair1_xxcyu1",
     category: "chair",
   },
   {
     id: 16,
     name: "Elite Racer Premium Gaming Chair",
     price: 10999,
-    imageUrl: "assets/images/chair2.png",
+    imageUrl:
+      "https://res.cloudinary.com/dnt75yyou/image/upload/f_auto,q_auto/chair2_r2tzk2",
     category: "chair",
   },
   {
     id: 17,
     name: "ComfortX Adjustable Gaming Chair",
     price: 7999,
-    imageUrl: "assets/images/chair3.png",
+    imageUrl:
+      "https://res.cloudinary.com/dnt75yyou/image/upload/f_auto,q_auto/chair3_k3mbzs",
     category: "chair",
   },
 ];

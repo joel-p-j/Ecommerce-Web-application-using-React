@@ -34,14 +34,23 @@ const Banner = () => {
     prevArrow: <PrevArrow />,
   };
 
+  // ✅ Cloudinary optimized banner URLs
+  const banners = [
+    "https://res.cloudinary.com/dnt75yyou/image/upload/f_auto,q_auto/Banner1_cxxc4s",
+    "https://res.cloudinary.com/dnt75yyou/image/upload/f_auto,q_auto/Banner2_xdiiwd",
+    "https://res.cloudinary.com/dnt75yyou/image/upload/f_auto,q_auto/Banner3_gp0m11",
+    "https://res.cloudinary.com/dnt75yyou/image/upload/f_auto,q_auto/Banner4_z7yw9w",
+  ];
+
   return (
     <div className="relative w-full px-3 sm:px-6 md:px-10 py-4 sm:py-6">
       <Slider {...settings}>
-        {["Banner1", "Banner2", "Banner3"].map((banner, index) => (
+        {banners.map((src, index) => (
           <div key={index}>
             <img
-              src={`assets/images/${banner}.png`}
+              src={src}
               alt={`Banner ${index + 1}`}
+              loading="lazy"
               className="
                 w-full
                 h-[180px]
