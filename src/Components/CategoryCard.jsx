@@ -12,19 +12,38 @@ const CategoryCard = () => {
   ];
 
   return (
-    <div className="p-10 w-full">
-      <h1 className="py-10 px-20 text-5xl font-semibold">Go Beyond Limits</h1>
-      <div className="Card-container grid grid-cols-2 lg:grid-cols-5 gap-5">
+    <div className="px-4 sm:px-6 md:px-10 py-10 w-full">
+      
+      <h1 className="
+        text-2xl
+        sm:text-3xl
+        md:text-4xl
+        lg:text-5xl
+        font-semibold
+        text-center
+        mb-10
+      ">
+        Go Beyond Limits
+      </h1>
+
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-5">
         {Categories.map((cat) => (
           <Link key={cat.name} to={`/category/${cat.name}`}>
-            <div className="card bg-[#FAFAFA] lg:h-90 rounded-2xl">
-              <img className="rounded-t-2xl " alt="Keyboards" src={cat.image} />
-              <div className="card-Text py-5 px-10 flex justify-between items-center">
-                <h1 className="text-xl font-medium">{cat.name}</h1>
-                <h1 className="text-xl">
-                  <AiOutlineRight />
+            <div className="bg-[#FAFAFA] rounded-2xl overflow-hidden hover:shadow-lg transition">
+              
+              <img
+                className="w-full h-32 sm:h-40 md:h-48 object-cover"
+                alt={cat.name}
+                src={cat.image}
+              />
+
+              <div className="py-3 px-4 sm:px-6 flex justify-between items-center">
+                <h1 className="text-sm sm:text-base md:text-lg font-medium capitalize">
+                  {cat.name}
                 </h1>
+                <AiOutlineRight className="text-lg sm:text-xl" />
               </div>
+
             </div>
           </Link>
         ))}

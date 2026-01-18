@@ -190,46 +190,76 @@ useEffect(() => {
   );
 
   const settings = {
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 2500,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-  };
+  arrows: true,
+  autoplay: true,
+  autoplaySpeed: 2500,
+  infinite: true,
+  speed: 500,
+  slidesToScroll: 1,
+  slidesToShow: 4,
+
+  responsive: [
+    {
+      breakpoint: 1280, // large screens
+      settings: {
+        slidesToShow: 3,
+      },
+    },
+    {
+      breakpoint: 1024, // tablets
+      settings: {
+        slidesToShow: 2,
+      },
+    },
+    {
+      breakpoint: 640, // mobile
+      settings: {
+        slidesToShow: 1,
+        arrows: false,
+      },
+    },
+  ],
+
+  nextArrow: <NextArrow />,
+  prevArrow: <PrevArrow />,
+};
+
 
   const keyboards = products.filter(p => p.category === "keyboard");
   const mouse = products.filter(p => p.category === "mouse");
 
-  return (
-    <div className="relative w-full overflow-x-clip">
-      <Interval />
+return (
+  <>
+    {/* SHOW ON ALL SCREENS */}
+    <Interval />
 
+    {/* SHOW ON ALL SCREENS */}
+    <div className="relative w-full overflow-hidden">
+      
       {/* KEYBOARDS */}
-      <div className="p-10">
-        <h1 className="text-3xl md:text-5xl font-semibold mb-8">
+      <div className="px-3 sm:px-6 md:px-10 py-6">
+        <h1 className="text-xl sm:text-3xl md:text-5xl font-semibold mb-4 sm:mb-8">
           Gaming Keyboards
         </h1>
 
         <Slider {...settings}>
           {keyboards.map((product) => (
-            <div key={product.id} className="px-5">
-              <div className="bg-[#FAFAFA] rounded-2xl h-[450px] flex flex-col">
+            <div key={product.id} className="px-2 sm:px-4">
+              <div className="bg-[#FAFAFA] rounded-2xl flex flex-col h-auto sm:h-[420px]">
                 <img
                   src={product.imageUrl}
                   alt={product.name}
-                  className="h-2/3 object-cover"
+                  className="w-full h-40 sm:h-60 object-cover rounded-t-2xl"
                 />
-                <div className="p-5 flex flex-col justify-between flex-1">
-                  <h1 className="text-lg font-medium">{product.name}</h1>
-                  <div className="flex justify-between items-center">
+                <div className="p-3 sm:p-5 flex flex-col justify-between flex-1">
+                  <h1 className="text-sm sm:text-lg font-medium line-clamp-2">
+                    {product.name}
+                  </h1>
+                  <div className="flex justify-between items-center mt-3">
                     <span className="font-semibold">${product.price}</span>
                     <button
                       onClick={() => handleCheckout(product)}
-                      className="bg-indigo-600 text-white px-4 py-2 rounded-lg"
+                      className="bg-indigo-600 text-white px-3 py-2 rounded-lg"
                     >
                       Buy Now
                     </button>
@@ -242,27 +272,29 @@ useEffect(() => {
       </div>
 
       {/* MOUSE */}
-      <div className="p-10">
-        <h1 className="text-3xl md:text-5xl font-semibold mb-8">
+      <div className="px-3 sm:px-6 md:px-10 py-6">
+        <h1 className="text-xl sm:text-3xl md:text-5xl font-semibold mb-4 sm:mb-8">
           Gaming Mouse
         </h1>
 
         <Slider {...settings}>
           {mouse.map((product) => (
-            <div key={product.id} className="px-5">
-              <div className="bg-[#FAFAFA] rounded-2xl h-[450px] flex flex-col">
+            <div key={product.id} className="px-2 sm:px-4">
+              <div className="bg-[#FAFAFA] rounded-2xl flex flex-col h-auto sm:h-[420px]">
                 <img
                   src={product.imageUrl}
                   alt={product.name}
-                  className="h-2/3 object-cover"
+                  className="w-full h-40 sm:h-60 object-cover rounded-t-2xl"
                 />
-                <div className="p-5 flex flex-col justify-between flex-1">
-                  <h1 className="text-lg font-medium">{product.name}</h1>
-                  <div className="flex justify-between items-center">
+                <div className="p-3 sm:p-5 flex flex-col justify-between flex-1">
+                  <h1 className="text-sm sm:text-lg font-medium line-clamp-2">
+                    {product.name}
+                  </h1>
+                  <div className="flex justify-between items-center mt-3">
                     <span className="font-semibold">${product.price}</span>
                     <button
                       onClick={() => handleCheckout(product)}
-                      className="bg-indigo-600 text-white px-4 py-2 rounded-lg"
+                      className="bg-indigo-600 text-white px-3 py-2 rounded-lg"
                     >
                       Buy Now
                     </button>
@@ -274,9 +306,16 @@ useEffect(() => {
         </Slider>
       </div>
 
+      {/* SHOW ON MOBILE TOO */}
       <Interval2 />
     </div>
-  );
+  </>
+);
+
+
+
+
+
 };
 
 export default ProductCard;
